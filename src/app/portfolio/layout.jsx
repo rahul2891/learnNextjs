@@ -1,9 +1,13 @@
 import React from 'react'
+import styles from './page.module.css'
 
-const InnerLayout = () => {
+const Layout = ({children}) => {
   return (
-    <div>InnerLayout</div>
+    <div>
+      <h1 className={styles.mainTitle}>Our Works</h1>
+      {children}
+    </div>
   )
 }
 
-export default InnerLayout
+export default Layout
