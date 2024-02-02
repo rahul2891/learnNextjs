@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import { notFound } from 'next/navigation';
 import useSWR from 'swr';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const Dashboard = () => {
   // const [data, setData] =  useState([]);
@@ -37,7 +38,37 @@ const Dashboard = () => {
   console.log("data", data)
 
   return (
-    <div>Dashboard</div>
+    <div className={styles.container}>
+      <div className={styles.posts}>
+        <div className={styles.post}>
+          <div className={styles.imgContainer}>
+          <Image 
+          src="https://images.pexels.com/photos/17845443/pexels-photo-17845443/free-photo-of-sea-clouds-sunset.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+          alt="" 
+          width={200} 
+          height={100} 
+          />
+          </div>
+          <h2 className={styles.postTitle}>Post Title</h2>
+          <span className={styles.delete}>
+                    X
+                  </span>
+        </div>
+      </div>
+      <form className={styles.new} onSubmit={()=> console.log("submoit")}>
+          <h1>Add New Post</h1>
+          <input type="text" placeholder="Title" className={styles.input} />
+          <input type="text" placeholder="Desc" className={styles.input} />
+          <input type="text" placeholder="Image" className={styles.input} />
+          <textarea
+            placeholder="Content"
+            className={styles.textArea}
+            cols="30"
+            rows="10"
+          ></textarea>
+          <button className={styles.button}>Send</button>
+        </form>
+    </div>
   )
 }
 

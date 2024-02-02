@@ -7,7 +7,7 @@ export const GET = async (request, {params}) => {
     const {id} = params;
 
     try {
-
+            console.log("checking", params)
         await connect(); 
 
         const post = await Post.findById(id)
