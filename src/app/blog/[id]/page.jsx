@@ -4,17 +4,18 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 async function getData(id) {
-  const res = await fetch(`http://localhost:3000/api/posts/${id}`, 
-  {cache: "no-store",})
- 
+  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+    cache: "no-store",
+  });
+
   if (!res.ok) {
     return notFound()
   }
- 
-  return res.json()
+
+  return res.json();
 }
 
-export async function generateMetaData( params ) {
+export async function generateMetaData( {params} ) {
   const post = await getData(params.id)
   return {
     title: post.title,
@@ -24,6 +25,7 @@ export async function generateMetaData( params ) {
 
 const BlogPost = async ({params}) => {
   const data = await getData(params.id)
+  console.log("data", data)
   
   return (
     <div className={styles.container}>
@@ -33,7 +35,7 @@ const BlogPost = async ({params}) => {
         <p className={styles.desc}>{data.desc}</p>
         <div className={styles.author}>
         <Image
-        src="https://images.pexels.com/photos/307007/pexels-photo-307007.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        src={data.img}
         alt=""
         width={40}
         height={40}
@@ -44,7 +46,7 @@ const BlogPost = async ({params}) => {
       </div>
       <div className={styles.imageContainer}>
         <Image
-        src="https://images.pexels.com/photos/307007/pexels-photo-307007.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        src={data.img}
         alt=""
         fill={true}
         className={styles.image}
@@ -54,15 +56,7 @@ const BlogPost = async ({params}) => {
       <div className={styles.content}>
         <p className={styles.text}>
           {data.content}
-          <br />
-            <br />
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-          Laboriosam corrupti omnis quaerat! Quod nisi explicabo, 
-          perspiciatis recusandae at soluta nemo! Laboriosam autem cumque, 
-          vitae saepe unde itaque iusto sit exercitationem?  Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-          Laboriosam corrupti omnis quaerat! Quod nisi explicabo, 
-          perspiciatis recusandae at soluta nemo! Laboriosam autem cumque, 
-          vitae saepe unde itaque iusto sit exercitationem?
+          
         </p>
       </div>
     </div>
